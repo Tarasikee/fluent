@@ -9,14 +9,11 @@ const options = {
 
 module.exports = passport => {
     passport.use(
-        new JwtStrategy(options, async (jwt_payload, done) => {
+        new JwtStrategy(options, async ({id}, done) => {
             try {
-                const user = await User.findById(jwt_payload.id).select('id email')
-                if (user) {
-                    done(null, user)
-                } else {
-                    done(user, false)
-                }
+                const user = await User.findById(id).select('id email')
+                if (!user) return done(user, false);
+                done(null, user)
             } catch (e) {
                 console.log(e);
             }
