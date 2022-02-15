@@ -1,11 +1,15 @@
 const express = require('express')
 const mongoose = require('mongoose')
+const passport = require('passport')
 const routes = require('./routes')
-const app = express();
+const app = express()
 
-mongoose.connect(process.env.mongoURI)
+mongoose.connect(process.env.MONGO_URI)
     .then(() => console.log('Connected'))
     .catch(err => console.log(err))
+
+app.use(passport.initialize())
+require('./middlewares/passport')(passport)
 
 //Utils
 app.use(require('morgan')('dev'))
@@ -19,4 +23,4 @@ app.use('/api/category', routes.categoryRoutes)
 app.use('/api/order', routes.orderRoutes)
 app.use('/api/position', routes.positionRoutes)
 
-module.exports = app;
+module.exports = app
