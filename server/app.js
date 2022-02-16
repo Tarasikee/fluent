@@ -13,6 +13,7 @@ require('./middlewares/passport')(passport)
 
 //Utils
 app.use(require('morgan')('dev'))
+app.use('/static', express.static('static'))
 app.use(express.json())
 app.use(require('cors')())
 

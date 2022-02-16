@@ -20,22 +20,27 @@ module.exports.getById = async (req, res) => {
     }
 }
 
-module.exports.delete = async (req, res) => {
+
+module.exports.create = async (req, res) => {
+    const category = new Category({
+        name: req.body.name,
+        user: req.user.id,
+        imageSrc: req.file ? req.file.path : ''
+    })
+
     try {
-        await Category.remove({_id: req.params.id})
-        await Position.remove({category: req.params.id})
-        res.status(200).json({
-            message: 'Categories and positions has been deleted'
-        })
+        await category.save();
+        res.status(201).json(category);
     } catch (e) {
         errorHandler(res, e)
     }
 }
 
-
-module.exports.create = async (req, res) => {
+module.exports.delete = async (req, res) => {
     try {
-
+        await Category.remove({_id: req.params.id})
+        await Position.remove({category: req.params.id})
+        res.status(200).json({message: 'Categories and positions has been deleted'})
     } catch (e) {
         errorHandler(res, e)
     }
@@ -43,7 +48,17 @@ module.exports.create = async (req, res) => {
 
 module.exports.update = async (req, res) => {
     try {
+        const updated = {
+            name: req.body.name,
+            imageSrc: req.file?.path || ''
+        }
 
+        const category = await Category.findOneAndUpdate(
+            {_id: req.params.id},
+            {$set: updated},
+            {new: true}
+        )
+        res.status(200).json(category)
     } catch (e) {
         errorHandler(res, e)
     }
