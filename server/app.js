@@ -15,7 +15,7 @@ require('./middlewares/passport')(passport)
 app.use(require('morgan')('dev'))
 app.use('/static', express.static('static'))
 app.use(express.json())
-app.use(require('cors')())
+app.use(require('cors')({origin: '*'}));
 
 //Routes
 app.use('/api/analytics', routes.analyticsRoutes)

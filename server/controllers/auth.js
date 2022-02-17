@@ -3,6 +3,18 @@ const jwt = require('jsonwebtoken')
 const User = require('../models/User')
 const errorHandler = require('../utils/errorHandler')
 
+module.exports.check = (req, res) => {
+    try {
+        const token = jwt.sign({
+            id: req.user.id,
+            email: req.user.email
+        }, process.env.JWT, {expiresIn: 60 * 60})
+        res.status(200).json({token: `Bearer ${token}`})
+    } catch (e) {
+        errorHandler(res, e);
+    }
+}
+
 module.exports.login = async (req, res) => {
     const {email, password} = req.body
     const candidate = await User.findOne({email})

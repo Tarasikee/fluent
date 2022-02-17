@@ -2,8 +2,8 @@
   "compilerOptions": {
     "target": "ES2016",
     "lib": [
-      "dom",
       "es2016",
+      "dom",
       "dom.iterable",
       "esnext"
     ],
@@ -15,7 +15,6 @@
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
     "module": "esnext",
-
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
