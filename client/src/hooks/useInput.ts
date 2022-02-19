@@ -13,3 +13,5 @@ export const useInput = (initialValue: string) => {
 
     return {value, onChange, clear};
 };
+
+export type hookedInput = ReturnType<typeof useInput>;

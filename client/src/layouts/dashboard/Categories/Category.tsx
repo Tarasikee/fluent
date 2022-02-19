@@ -1,11 +1,12 @@
 import React from 'react';
 
-const Orders = () => {
+const Category = () => {
     return (
         <div>
+
 
         </div>
     );
 };
 
-export default Orders;
+export default Category;
