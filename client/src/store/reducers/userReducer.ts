@@ -38,8 +38,8 @@ export const userSlice = createSlice({
             state.isAuth = false;
             state.isLoading = false;
             state.error = action.payload;
-        },
-    }
+        }
+    },
 });
 
 export default userSlice.reducer;

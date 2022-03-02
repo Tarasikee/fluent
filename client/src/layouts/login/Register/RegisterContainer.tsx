@@ -3,25 +3,17 @@ import Register from "./Register";
 import {useNavigate} from "react-router-dom";
 import {useInput} from "../../../hooks/useInput";
 import {passwordMinLength, validateEmail} from "../../../utils/validators";
-import {AuthService} from "../../../http/AuthService";
+import {AuthService} from "../../../services/AuthService";
 import {useAction} from "../../../hooks/useRedux";
 
 const RegisterContainer = () => {
-    const {createToast} = useAction();
+    const {createError, createPrimary} = useAction();
     const navigate = useNavigate();
     const [isLoading, setLoading] = useState(false);
 
     const email = useInput('');
     const password = useInput('');
     const rep_password = useInput('');
-
-    const createError = (message: string) => {
-        createToast({bg: 'Danger', title: 'Great thoughts error', message});
-    };
-
-    const createPrimary = (message: string) => {
-        createToast({bg: 'Primary', title: 'Great thoughts', message});
-    };
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -37,7 +29,7 @@ const RegisterContainer = () => {
             setLoading(true);
             await AuthService.register(email.value, password.value);
             createPrimary('Successful registered');
-            navigate('/login');
+            navigate('login');
         } catch (e: any) {
             createError(e.response.data.message);
         } finally {

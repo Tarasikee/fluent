@@ -1,61 +1,61 @@
 import React, {useEffect} from 'react';
 import {useAction, useTypedSelector} from "./hooks/useRedux";
-import Header from "./components/Header";
+import HeaderContainer from "./components/Header/HeaderContainer";
 import {ToastContainer} from "react-bootstrap";
 import Tooltip from "./components/Tooltip";
 import {Route, Routes} from "react-router-dom";
 import Overview from "./layouts/dashboard/Overview";
 import Analytics from "./layouts/dashboard/Analytics";
-import History from "./layouts/dashboard/History";
-import AddNewOrder from "./layouts/dashboard/AddNewOrder";
+import AddNewOrderContainer from "./layouts/dashboard/AddNewOrder/AddNewOrderContainer";
 import Categories from "./layouts/dashboard/Categories/Categories";
-import Category from "./layouts/dashboard/Categories/Category";
-import Add from "./layouts/dashboard/Categories/Add";
-import Loader from "./components/Loader";
 import AdminLayout from "./layouts/dashboard/AdminLayout";
 import NotFound from "./components/NotFound";
 import GuestLayout from "./layouts/login/GuestLayout";
+import AddCategoryContainer from "./layouts/dashboard/Categories/Add/AddCategoryContainer";
+import CategoryContainer from "./layouts/dashboard/Categories/Category/CategoryContainer";
+import OptionsContainer from "./layouts/dashboard/AddNewOrder/Options/OptionsContainer";
+import AddNewOrderLayout from "./layouts/dashboard/AddNewOrder/AddNewOrderLayout";
+import HistoryContainer from "./layouts/dashboard/History/HistoryContainer";
+import FirstOpen from "./components/FirstOpen";
 
 function App() {
     const {toasts} = useTypedSelector(store => store.toastSlice);
-    const {isLoading} = useTypedSelector(store => store.userSlice);
     const {check} = useAction();
+
 
     useEffect(() => {
         check();
     }, []);
 
-    if (isLoading) {
-        return <Loader />;
-    }
+    return <>
+        <HeaderContainer />
 
-    return (
-        <>
-            <Header />
-
-            <Routes>
-                <Route path={'admin'} element={<AdminLayout />}>
-                    <Route path={''} element={<Overview />} />
-                    <Route path={'analytics'} element={<Analytics />} />
-                    <Route path={'history'} element={<History />} />
-                    <Route path={'add-new-order'} element={<AddNewOrder />} />
-                    <Route path={'categories'}>
-                        <Route path={''} element={<Categories />} />
-                        <Route path={":id"} element={<Category />} />
-                        <Route path={"add"} element={<Add />} />
-                    </Route>
-                    <Route path={'*'} element={<NotFound navigate={'admin'} />} />
+        <Routes>
+            <Route path={'admin'} element={<AdminLayout />}>
+                <Route path={''} element={<Overview />} />
+                <Route path={'analytics'} element={<Analytics />} />
+                <Route path={'history'} element={<HistoryContainer />} />
+                <Route path={'add-new-order'} element={<AddNewOrderLayout />}>
+                    <Route path={''} element={<AddNewOrderContainer />} />
+                    <Route path={':id'} element={<OptionsContainer />} />
                 </Route>
+                <Route path={'categories'}>
+                    <Route path={''} element={<Categories />} />
+                    <Route path={":id"} element={<CategoryContainer />} />
+                    <Route path={"add"} element={<AddCategoryContainer />} />
+                </Route>
+            </Route>
 
-                <Route path={'guest/*'} element={<GuestLayout />} />
-            </Routes>
+            <Route path={'guest/*'} element={<GuestLayout />} />
+            <Route path={'*'} element={<NotFound />} />
+            <Route path={'/'} element={<FirstOpen />} />
+        </Routes>
 
 
-            <ToastContainer className={"m-4"} position={'bottom-end'}>
-                {toasts && toasts.map((data, idx) => <Tooltip key={idx} {...data} />)}
-            </ToastContainer>
-        </>
-    );
+        <ToastContainer style={{zIndex: 1100}} className={"m-4 position-fixed"} position={'bottom-end'}>
+            {toasts && toasts.map((data, idx) => <Tooltip key={idx} {...data} />)}
+        </ToastContainer>
+    </>;
 }
 
 export default App;

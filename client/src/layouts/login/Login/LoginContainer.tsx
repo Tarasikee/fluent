@@ -2,24 +2,16 @@ import React, {useState} from 'react';
 import {useAction} from "../../../hooks/useRedux";
 import {useNavigate} from "react-router-dom";
 import {useInput} from "../../../hooks/useInput";
-import {AuthService} from "../../../http/AuthService";
+import {AuthService} from "../../../services/AuthService";
 import Login from "./Login";
 
 const LoginContainer = () => {
 
-    const {createToast, login} = useAction();
+    const {createError, createPrimary, login} = useAction();
     const navigate = useNavigate();
     const email = useInput('');
     const password = useInput('');
     const [isLoading, setLoading] = useState(false);
-
-    const createError = (message: string) => {
-        createToast({bg: 'Danger', title: 'Great thoughts error', message});
-    };
-
-    const createPrimary = (message: string) => {
-        createToast({bg: 'Primary', title: 'Great thoughts', message});
-    };
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();

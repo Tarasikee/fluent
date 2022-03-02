@@ -1,6 +1,5 @@
-import React, {useEffect} from 'react';
-import {categoriesAPI} from "../../../store/query/categoriesAPI";
-import {useAction} from "../../../hooks/useRedux";
+import React from 'react';
+import {api} from "../../../store/api";
 import Loader from "../../../components/Loader";
 import {Button, ListGroup} from "react-bootstrap";
 import {useNavigate} from 'react-router-dom';
@@ -8,30 +7,23 @@ import {useNavigate} from 'react-router-dom';
 const Categories = () => {
 
     const navigate = useNavigate();
-    const {createToast, logout} = useAction();
-    let {data, error, isLoading} = categoriesAPI.useFetchAllCategoriesQuery();
+    const {data, error, isLoading} = api.useFetchAllCategoriesQuery();
 
-    // useEffect(() => {
-    //     if (!error) return;
-    //     createToast({bg: 'Warning', title: 'Great thoughts', message: 'Sorry, your authorization has expired!'});
-    //     logout();
-    //
-    //     return () => {
-    //         error = {};
-    //     };
-    // }, [error]);
+    if (error) {
+        return <p>Something went wrong!</p>;
+    }
 
     return (
         <div>
             <div className={"d-flex justify-content-between align-items-center mb-5"}>
-                <span className={"display-5"}>Categories</span>
+                <span className={"display-6"}>Categories</span>
                 <Button onClick={() => navigate('add')}>Create</Button>
             </div>
 
             {isLoading
                 ? <Loader />
                 : <ListGroup>
-                    {data && data.map(({_id, name}) => (
+                    {data && data.slice(0).reverse().map(({_id, name}) => (
                         <ListGroup.Item action key={_id} onClick={() => navigate(_id)}>
                             {name}
                         </ListGroup.Item>

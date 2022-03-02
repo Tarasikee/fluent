@@ -1,20 +1,22 @@
 import {combineReducers} from "redux";
 import userSlice from "./reducers/userReducer";
 import toastSlice from "./reducers/toastReducer";
+import basketSlice from "./reducers/basketReducer";
 import {configureStore} from "@reduxjs/toolkit";
-import {categoriesAPI} from "./query/categoriesAPI";
+import {api} from "./api";
 
 const rootReducer = combineReducers({
-    [categoriesAPI.reducerPath]: categoriesAPI.reducer,
+    [api.reducerPath]: api.reducer,
     userSlice,
     toastSlice,
+    basketSlice,
 });
 
 export const setupStore = () => {
     return configureStore({
         reducer: rootReducer,
         middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(
-            categoriesAPI.middleware
+            api.middleware
         )
     });
 };

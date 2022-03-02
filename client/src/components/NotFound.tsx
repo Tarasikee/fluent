@@ -1,15 +1,23 @@
 import React, {useEffect} from 'react';
 import {useAction} from "../hooks/useRedux";
-import {Navigate} from "react-router-dom";
+import {Container, Row} from "react-bootstrap";
+import {Link} from "react-router-dom";
 
-const NotFound = ({navigate}: { navigate: string }) => {
-    const {createToast} = useAction();
+const NotFound = () => {
+    const {createWarn} = useAction();
 
     useEffect(() => {
-        createToast({bg: 'warning', title: 'Great Thoughts Warning', message: 'Can\'t find route'});
+        createWarn('Can\'t find route');
     }, []);
 
-    return <Navigate to={navigate} />;
+    return (
+        <Container>
+            <Row>
+                There is no such route^(<br />
+                <span>Try <Link to={'guest/login'}>this one:)</Link></span>
+            </Row>
+        </Container>
+    );
 };
 
 export default NotFound;

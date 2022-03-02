@@ -47,12 +47,16 @@ module.exports.delete = async (req, res) => {
 }
 
 module.exports.update = async (req, res) => {
-    try {
-        const updated = {
-            name: req.body.name,
-            imageSrc: req.file?.path || ''
-        }
+    const updated = {
+        name: req.body.name
+    }
 
+    if (req.file) {
+        updated.imageSrc = req.file.path
+    }
+
+
+    try {
         const category = await Category.findOneAndUpdate(
             {_id: req.params.id},
             {$set: updated},

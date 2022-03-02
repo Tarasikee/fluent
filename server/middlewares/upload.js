@@ -1,6 +1,5 @@
 const multer = require('multer')
 const moment = require('moment')
-const path = require('path')
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {

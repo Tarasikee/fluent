@@ -15,18 +15,15 @@ const Register: FC<RegisterProps> = ({email, password, rep_password, isLoading, 
     <p className={"display-5"}>Register</p>
     <Form onSubmit={handleSubmit}>
         <FloatingLabel label="Email address" className="mb-3">
-            <Form.Control value={email.value} onChange={email.onChange} type="text"
-                          placeholder="name@example.com" />
+            <Form.Control {...email} type="text" placeholder="name@example.com" />
         </FloatingLabel>
 
         <FloatingLabel label="Password" className="mb-3">
-            <Form.Control value={password.value} onChange={password.onChange} type="password"
-                          placeholder="password" />
+            <Form.Control {...password} type="password" placeholder="password" />
         </FloatingLabel>
 
         <FloatingLabel label="Repeat password" className="mb-3">
-            <Form.Control value={rep_password.value} onChange={rep_password.onChange} type="password"
-                          placeholder="repeat password" />
+            <Form.Control {...rep_password} type="password" placeholder="repeat password" />
         </FloatingLabel>
 
         <Button variant="primary" type="submit" disabled={isLoading}>

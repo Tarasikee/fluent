@@ -14,13 +14,11 @@ const Login: FC<LoginProps> = ({email, password, isLoading, handleSubmit}) => (<
     <p className={"display-5"}>Login</p>
     <Form onSubmit={handleSubmit}>
         <FloatingLabel label="Email address" className="mb-3">
-            <Form.Control value={email.value} onChange={email.onChange} type="text"
-                          placeholder="name@example.com" />
+            <Form.Control {...email} type="text" placeholder="name@example.com" />
         </FloatingLabel>
 
         <FloatingLabel label="Password" className="mb-3">
-            <Form.Control value={password.value} onChange={password.onChange} type="password"
-                          placeholder="password" />
+            <Form.Control {...password} type="password" placeholder="password" />
         </FloatingLabel>
 
         <Button variant="primary" type="submit" disabled={isLoading}>

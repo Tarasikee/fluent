@@ -7,11 +7,7 @@ export const useInput = (initialValue: string) => {
         setValue(event.target.value);
     };
 
-    const clear = () => {
-        setValue('');
-    };
-
-    return {value, onChange, clear};
+    return {value, onChange};
 };
 
 export type hookedInput = ReturnType<typeof useInput>;
