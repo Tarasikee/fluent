@@ -1,38 +1,31 @@
-import React, {useState} from 'react';
-import {useAction} from "../../../hooks/useRedux";
-import {useNavigate} from "react-router-dom";
-import {useInput} from "../../../hooks/useInput";
-import {AuthService} from "../../../services/AuthService";
+import React from 'react';
+import {useGuestActions} from "../../../hooks/useGuestActions";
+import {withFormik} from "formik";
+import {initialLoginProps} from "../../../interfaces/IGuest";
+import * as yup from "yup";
 import Login from "./Login";
 
+const FormikWrapper = withFormik<{
+    login: (data: initialLoginProps) => Promise<void>
+}, initialLoginProps>({
+    mapPropsToValues: () => ({
+        email: '',
+        password: ''
+    }),
+    validationSchema: yup.object().shape({
+        email: yup.string().required('Email is required!'),
+        password: yup.string().required('Password is required!')
+    }),
+
+    handleSubmit: async (values, {props}) => {
+        await props.login(values);
+    },
+})(Login);
+
+
 const LoginContainer = () => {
-
-    const {createError, createPrimary, login} = useAction();
-    const navigate = useNavigate();
-    const email = useInput('');
-    const password = useInput('');
-    const [isLoading, setLoading] = useState(false);
-
-    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-
-        if (!email.value) return createError('Email is required');
-        if (!password.value) return createError('Password is required');
-
-        setLoading(true);
-        try {
-            const response = await AuthService.login(email.value, password.value);
-            createPrimary('Welcome to CRM!');
-            login(response.data.token);
-            navigate('admin');
-        } catch (e: any) {
-            createError(e.response.data.message);
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    return <Login {...{email, password, isLoading, handleSubmit}} />;
+    const {login} = useGuestActions();
+    return <FormikWrapper login={login} />;
 };
 
 export default LoginContainer;

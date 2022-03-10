@@ -1,11 +1,11 @@
 import {BaseQueryFn, createApi, FetchArgs, fetchBaseQuery, FetchBaseQueryError} from "@reduxjs/toolkit/query/react";
 import {ICategory} from "../interfaces/ICategory";
-import {logout} from "./actions/loginActions";
 import {IPosition} from "../interfaces/IPosition";
 import {IOrder} from "../interfaces/IOrder";
 import {IBasketItem} from "../interfaces/IBasketItem";
 import {IOverview} from "../interfaces/IOverview";
 import {IAnalytics} from "../interfaces/IAnalytics";
+import {userSlice} from "./reducers/userReducer";
 
 const authQuery = fetchBaseQuery({
     baseUrl: 'http://localhost:5000/api/',
@@ -28,7 +28,8 @@ const baseQueryWithLogout: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
     const result = await authQuery(args, api, extraOptions);
 
     if (result.error && (result.error as any).originalStatus === 401) {
-        api.dispatch(logout());
+        api.dispatch(userSlice.actions.logout());
+        localStorage.removeItem('token');
     }
 
     return result;
@@ -132,6 +133,7 @@ export const api = createApi({
                     limit: 100
                 }
             }),
+            keepUnusedDataFor: 0,
             providesTags: ['Orders']
         }),
         createOrder: build.mutation<IOrder, IBasketItem[]>({

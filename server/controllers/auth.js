@@ -28,7 +28,7 @@ module.exports.login = async (req, res) => {
     const token = jwt.sign({
         id: candidate.id,
         email: candidate.email
-    }, process.env.JWT, {expiresIn: 60 * 60})
+    }, process.env.JWT_ACCESS_SECRET, {expiresIn: 60 * 60 * 24})
     res.status(200).json({token: `Bearer ${token}`})
 }
 

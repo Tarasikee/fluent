@@ -25,7 +25,7 @@ const Analytics = () => {
                     <Container fluid className={"mb-5 pb-5"}>
                         <Row className={"overflow-auto mt-5"}>
                             <p className="display-6">
-                                Data for gain for all time:
+                                Gain data of all time:
                             </p>
                             <AreaChart
                                 width={1200}
@@ -49,7 +49,7 @@ const Analytics = () => {
 
                         <Row className={"overflow-auto mt-5"}>
                             <p className="display-6">
-                                Data for orders for all time:
+                                Orders data of all time:
                             </p>
                             <AreaChart
                                 width={1200}

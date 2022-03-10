@@ -1,34 +1,49 @@
 import React, {FC} from 'react';
-import {Button, FloatingLabel, Form} from "react-bootstrap";
+import {Button, Form} from "react-bootstrap";
 import {Link} from "react-router-dom";
-import {hookedInput} from "../../../hooks/useInput";
+import {FormikProps} from "formik";
+import {initialLoginProps} from "../../../interfaces/IGuest";
+import Loader from "../../../components/Loader";
 
-interface LoginProps {
-    email: hookedInput;
-    password: hookedInput;
-    isLoading: boolean;
-    handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
-}
+const Login: FC<FormikProps<initialLoginProps>> = (
+    {
+        handleSubmit,
+        handleChange,
+        values,
+        touched,
+        errors,
+        isSubmitting
+    }
+) => (<Form onSubmit={handleSubmit} noValidate>
 
-const Login: FC<LoginProps> = ({email, password, isLoading, handleSubmit}) => (<>
-    <p className={"display-5"}>Login</p>
-    <Form onSubmit={handleSubmit}>
-        <FloatingLabel label="Email address" className="mb-3">
-            <Form.Control {...email} type="text" placeholder="name@example.com" />
-        </FloatingLabel>
+    <Form.Group className="mb-3">
+        <Form.Label>Email address</Form.Label>
+        <Form.Control value={values.email} onChange={handleChange}
+                      isInvalid={touched.password && Boolean(errors.email)}
+                      name={'email'} type="text" autoComplete={"email"} />
+        <Form.Control.Feedback type="invalid">
+            {errors.email}
+        </Form.Control.Feedback>
+    </Form.Group>
 
-        <FloatingLabel label="Password" className="mb-3">
-            <Form.Control {...password} type="password" placeholder="password" />
-        </FloatingLabel>
 
-        <Button variant="primary" type="submit" disabled={isLoading}>
-            {isLoading ? 'Loading…' : 'Enter'}
-        </Button>
+    <Form.Group className="mb-3">
+        <Form.Label>Password</Form.Label>
+        <Form.Control value={values.password} onChange={handleChange}
+                      isInvalid={touched.password && Boolean(errors.password)}
+                      name={'password'} type="password" autoComplete={"password"} />
+        <Form.Control.Feedback type="invalid">
+            {errors.password}
+        </Form.Control.Feedback>
+    </Form.Group>
 
-        <div className={"mt-3"}>
-            <span>Already have an <Link to="/guest">account</Link>?</span>
-        </div>
-    </Form>
-</>);
+    <Button variant="primary" type="submit" disabled={isSubmitting}>
+        {isSubmitting ? <Loader /> : 'Submit'}
+    </Button>
+
+    <div className={"mt-3"}>
+        <span>Don't have an <Link to="/guest/register">account</Link>?</span>
+    </div>
+</Form>);
 
 export default Login;

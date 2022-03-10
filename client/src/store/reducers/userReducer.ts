@@ -1,5 +1,4 @@
-import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {check} from "../actions/userActions";
+import {createSlice} from "@reduxjs/toolkit";
 
 interface initialState {
     isAuth: boolean;
@@ -24,22 +23,7 @@ export const userSlice = createSlice({
         logout(state) {
             state.isAuth = false;
         }
-    },
-    extraReducers: {
-        [check.pending.type]: (state) => {
-            state.isLoading = true;
-        },
-        [check.fulfilled.type]: (state) => {
-            state.isLoading = false;
-            state.isAuth = true;
-            state.error = '';
-        },
-        [check.rejected.type]: (state, action: PayloadAction<string>) => {
-            state.isAuth = false;
-            state.isLoading = false;
-            state.error = action.payload;
-        }
-    },
+    }
 });
 
 export default userSlice.reducer;

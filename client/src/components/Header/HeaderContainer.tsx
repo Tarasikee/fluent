@@ -1,12 +1,13 @@
 import React from 'react';
-import {useAction, useTypedSelector} from "../../hooks/useRedux";
+import {useTypedSelector} from "../../hooks/useRedux";
 import {useNavigate} from "react-router-dom";
 import Header from "./Header";
+import {useGuestActions} from "../../hooks/useGuestActions";
 
 const HeaderContainer = () => {
     const navigate = useNavigate();
     const {isAuth} = useTypedSelector(store => store.userSlice);
-    const {logout} = useAction();
+    const {logout} = useGuestActions();
 
     const links = [
         {to: '/admin/', name: 'Overview'},

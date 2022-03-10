@@ -1,5 +1,5 @@
-import React, {useEffect} from 'react';
-import {useAction, useTypedSelector} from "./hooks/useRedux";
+import React, {useEffect, useState} from 'react';
+import {useTypedSelector} from "./hooks/useRedux";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import {ToastContainer} from "react-bootstrap";
 import Tooltip from "./components/Tooltip";
@@ -16,22 +16,35 @@ import CategoryContainer from "./layouts/dashboard/Categories/Category/CategoryC
 import OptionsContainer from "./layouts/dashboard/AddNewOrder/Options/OptionsContainer";
 import AddNewOrderLayout from "./layouts/dashboard/AddNewOrder/AddNewOrderLayout";
 import HistoryContainer from "./layouts/dashboard/History/HistoryContainer";
-import FirstOpen from "./components/FirstOpen";
+import LoginCheck from "./components/LoginCheck";
+import RegisterContainer from "./layouts/login/Register/RegisterContainer";
+import LoginContainer from "./layouts/login/Login/LoginContainer";
+import {OnlyGuestRoute, PrivateRoute} from "./components/RouteDefenders";
+import {useGuestActions} from "./hooks/useGuestActions";
 
 function App() {
     const {toasts} = useTypedSelector(store => store.toastSlice);
-    const {check} = useAction();
-
+    const [loading, setLoading] = useState(true);
+    const {check} = useGuestActions();
 
     useEffect(() => {
-        check();
+        check().finally(() => {
+            setLoading(false);
+        });
     }, []);
 
     return <>
         <HeaderContainer />
 
-        <Routes>
-            <Route path={'admin'} element={<AdminLayout />}>
+        {!loading && <Routes>
+            <Route path={'guest'} element={<OnlyGuestRoute><GuestLayout /></OnlyGuestRoute>}>
+                <Route path={''} element={<NotFound />} />
+                <Route path={'register'} element={<RegisterContainer />} />
+                <Route path={'login'} element={<LoginContainer />} />
+                <Route path={'*'} element={<NotFound />} />
+            </Route>
+
+            <Route path={'admin'} element={<PrivateRoute><AdminLayout /></PrivateRoute>}>
                 <Route path={''} element={<Overview />} />
                 <Route path={'analytics'} element={<Analytics />} />
                 <Route path={'history'} element={<HistoryContainer />} />
@@ -44,12 +57,12 @@ function App() {
                     <Route path={":id"} element={<CategoryContainer />} />
                     <Route path={"add"} element={<AddCategoryContainer />} />
                 </Route>
+                <Route path={'*'} element={<NotFound />} />
             </Route>
 
-            <Route path={'guest/*'} element={<GuestLayout />} />
+            <Route path={'/'} element={<LoginCheck />} />
             <Route path={'*'} element={<NotFound />} />
-            <Route path={'/'} element={<FirstOpen />} />
-        </Routes>
+        </Routes>}
 
 
         <ToastContainer style={{zIndex: 1100}} className={"m-4 position-fixed"} position={'bottom-end'}>

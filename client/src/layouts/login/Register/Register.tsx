@@ -1,39 +1,59 @@
 import React, {FC} from 'react';
-import {Button, FloatingLabel, Form} from "react-bootstrap";
+import {Button, Form} from "react-bootstrap";
 import {Link} from "react-router-dom";
-import {hookedInput} from "../../../hooks/useInput";
+import {FormikProps} from "formik";
+import Loader from "../../../components/Loader";
+import {initialRegisterProps} from "../../../interfaces/IGuest";
 
-interface RegisterProps {
-    email: hookedInput;
-    password: hookedInput;
-    rep_password: hookedInput;
-    isLoading: boolean;
-    handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
-}
+const Register: FC<FormikProps<initialRegisterProps>> = (
+    {
+        handleSubmit,
+        handleChange,
+        values,
+        touched,
+        errors,
+        isSubmitting
+    }
+) => (<Form onSubmit={handleSubmit} noValidate>
 
-const Register: FC<RegisterProps> = ({email, password, rep_password, isLoading, handleSubmit}) => (<>
-    <p className={"display-5"}>Register</p>
-    <Form onSubmit={handleSubmit}>
-        <FloatingLabel label="Email address" className="mb-3">
-            <Form.Control {...email} type="text" placeholder="name@example.com" />
-        </FloatingLabel>
+    <Form.Group className="mb-3">
+        <Form.Label>Email address</Form.Label>
+        <Form.Control value={values.email} onChange={handleChange}
+                      isInvalid={touched.password && Boolean(errors.email)}
+                      name={'email'} type="text" autoComplete={"email"} />
+        <Form.Control.Feedback type="invalid">
+            {errors.email}
+        </Form.Control.Feedback>
+    </Form.Group>
 
-        <FloatingLabel label="Password" className="mb-3">
-            <Form.Control {...password} type="password" placeholder="password" />
-        </FloatingLabel>
 
-        <FloatingLabel label="Repeat password" className="mb-3">
-            <Form.Control {...rep_password} type="password" placeholder="repeat password" />
-        </FloatingLabel>
+    <Form.Group className="mb-3">
+        <Form.Label>Password</Form.Label>
+        <Form.Control value={values.password} onChange={handleChange}
+                      isInvalid={touched.password && Boolean(errors.password)}
+                      name={'password'} type="password" autoComplete={"new-password"} />
+        <Form.Control.Feedback type="invalid">
+            {errors.password}
+        </Form.Control.Feedback>
+    </Form.Group>
 
-        <Button variant="primary" type="submit" disabled={isLoading}>
-            {isLoading ? 'Loading…' : 'Submit'}
-        </Button>
+    <Form.Group className="mb-3">
+        <Form.Label>Repeat password</Form.Label>
+        <Form.Control value={values.repeat_password} onChange={handleChange}
+                      isInvalid={touched.repeat_password && Boolean(errors.repeat_password)}
+                      name={'repeat_password'} type="password" autoComplete={"new-password"} />
+        <Form.Control.Feedback type="invalid">
+            {errors.repeat_password}
+        </Form.Control.Feedback>
+    </Form.Group>
 
-        <div className={"mt-3"}>
-            <span>Already have an <Link to="/guest/login">account</Link>?</span>
-        </div>
-    </Form>
-</>);
+    <Button variant="primary" type="submit" disabled={isSubmitting}>
+        {isSubmitting ? <Loader /> : 'Submit'}
+    </Button>
+
+    <div className={"mt-3"}>
+        <span>Already have an <Link to="/guest/login">account</Link>?</span>
+    </div>
+</Form>);
 
 export default Register;
