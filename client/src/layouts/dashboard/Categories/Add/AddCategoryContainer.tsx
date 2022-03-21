@@ -1,51 +1,49 @@
-import React, {useState} from 'react';
-import {useNavigate} from "react-router-dom";
-import {api} from "../../../../store/api";
-import {useInput} from "../../../../hooks/useInput";
-import {useAction} from "../../../../hooks/useRedux";
+import React from 'react';
 import AddCategory from "./AddCategory";
+import {withFormik} from "formik";
+import {initialAddCategoriesProps} from "../../../../interfaces/IFormikProps";
+import {useAction} from "../../../../hooks/useRedux";
+import {api} from "../../../../store/api";
+import {useNavigate} from "react-router-dom";
+
+const FormikWrapper = withFormik<{
+    createCategory: any,
+    back: () => void,
+    createError: (message: string) => void,
+    createPrimary: (message: string) => void,
+}, initialAddCategoriesProps>({
+    mapPropsToValues: () => ({
+        file: null,
+        name: ''
+    }),
+
+    handleSubmit: async (values, {
+        props
+    }) => {
+        if (!values.name) {
+            return props.createError('Name is required');
+        }
+
+        if (!values.file) {
+            return props.createError('Image is required');
+        }
+
+        await props.createCategory({name: values.name, image: values.file as any});
+        props.createPrimary('Category created');
+        props.back();
+    }
+})(AddCategory)
 
 const AddCategoryContainer = () => {
     const navigate = useNavigate();
-    const reader = new FileReader();
-
+    const [createCategory] = api.useCreateCategoryMutation();
     const {createError, createPrimary} = useAction();
-    const [createCategory, {isLoading}] = api.useCreateCategoryMutation();
 
-    const name = useInput('');
-    const [image, setImage] = useState<ArrayBuffer | string>('');
-    const [file, setFile] = useState<File>();
+    const back = () => navigate('/admin/categories');
 
-
-    const back = () => {
-        navigate('/admin/categories');
-    };
-
-    const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        if (!event.currentTarget.files) return;
-
-        setFile(event.currentTarget.files[0]);
-        reader.readAsDataURL(event.currentTarget.files[0]);
-        reader.addEventListener('load', e => {
-            if (e.target && e.target.result) {
-                setImage(e.target.result);
-            }
-        });
-    };
-
-    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-
-        if (!name.value) return createError('Name is required');
-        if (!file) return createError('Please choose photo');
-
-        await createCategory({name: name.value, image: file});
-        createPrimary('Category created');
-        back();
-    };
-
-
-    return <AddCategory {...{back, handleSubmit, name, onChange, isLoading, image}} />;
-};
+    return (
+        <FormikWrapper {...{createError, createPrimary, createCategory, back}}/>
+    );
+}
 
 export default AddCategoryContainer;

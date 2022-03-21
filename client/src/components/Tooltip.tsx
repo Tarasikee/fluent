@@ -12,7 +12,7 @@ const Tooltip: FC<IToast> = ({bg, title, message}) => {
     }, []);
 
     return (
-        <Toast bg={bg.toLowerCase()} onClose={() => setShow(false)} show={show} delay={5000} autohide>
+        <Toast bg={bg.toLowerCase()} onClose={() => setShow(false)} show={show} delay={3400} autohide>
             <Toast.Header>
                 <strong className="me-auto">{title}</strong>
                 <small>{time} second{time > 1 && 's'} ago</small>

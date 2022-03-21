@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import {Button, Form} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import {FormikProps} from "formik";
-import {initialLoginProps} from "../../../interfaces/IGuest";
+import {initialLoginProps} from "../../../interfaces/IFormikProps";
 import Loader from "../../../components/Loader";
 
 const Login: FC<FormikProps<initialLoginProps>> = (

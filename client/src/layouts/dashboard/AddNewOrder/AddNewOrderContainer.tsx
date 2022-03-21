@@ -46,7 +46,7 @@ const AddNewOrderContainer = () => {
                 <Col sm={12} md={6} xl={4} key={c._id} className={"mt-sm-4 mt-md-3 mt-xl-2 "}>
                     <Card>
                         <Card.Img style={{maxHeight: '180px', height: '180px'}} variant="top"
-                                  src={'http://localhost:5000/' + c?.imageSrc} />
+                                  src={'http://localhost:3400/' + c?.imageSrc} />
                         <Card.Body>
                             <Card.Title>{c.name}</Card.Title>
                             <Button onClick={() => navigate(c._id)} variant="primary">Open</Button>

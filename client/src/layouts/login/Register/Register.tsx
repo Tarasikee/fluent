@@ -3,7 +3,7 @@ import {Button, Form} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import {FormikProps} from "formik";
 import Loader from "../../../components/Loader";
-import {initialRegisterProps} from "../../../interfaces/IGuest";
+import {initialRegisterProps} from "../../../interfaces/IFormikProps";
 
 const Register: FC<FormikProps<initialRegisterProps>> = (
     {

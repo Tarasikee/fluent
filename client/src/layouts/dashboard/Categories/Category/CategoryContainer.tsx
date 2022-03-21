@@ -21,7 +21,7 @@ const CategoryContainer = () => {
     useEffect(() => {
         if (!isLoading) {
             setName(category?.name || '');
-            setImagePreview('http://localhost:5000/' + category?.imageSrc);
+            setImagePreview('http://localhost:3400/' + category?.imageSrc);
         }
     }, [isLoading]);
 

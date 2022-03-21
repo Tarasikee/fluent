@@ -1,7 +1,7 @@
 import React from 'react';
 import {useGuestActions} from "../../../hooks/useGuestActions";
 import {withFormik} from "formik";
-import {initialLoginProps} from "../../../interfaces/IGuest";
+import {initialLoginProps} from "../../../interfaces/IFormikProps";
 import * as yup from "yup";
 import Login from "./Login";
 

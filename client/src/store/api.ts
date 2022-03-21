@@ -8,7 +8,7 @@ import {IAnalytics} from "../interfaces/IAnalytics";
 import {userSlice} from "./reducers/userReducer";
 
 const authQuery = fetchBaseQuery({
-    baseUrl: 'http://localhost:5000/api/',
+    baseUrl: 'http://localhost:3400/api/',
     prepareHeaders: (headers) => {
         const token = localStorage.getItem('token');
 
@@ -58,7 +58,7 @@ export const api = createApi({
             },
             providesTags: (result, error, id) => [{type: 'Categories', id}],
         }),
-        createCategory: build.mutation<ICategory, { name: string; image: File; }>({
+        createCategory: build.mutation<ICategory, { name: string; image: File }>({
             query: ({name, image}) => {
                 const formData = new FormData();
                 formData.append('name', name);

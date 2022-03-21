@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import Register from "./Register";
 import * as yup from "yup";
 import {withFormik} from "formik";
-import {initialLoginProps, initialRegisterProps} from "../../../interfaces/IGuest";
+import {initialLoginProps, initialRegisterProps} from "../../../interfaces/IFormikProps";
 import {useGuestActions} from "../../../hooks/useGuestActions";
 
 const FormikWrapper = withFormik<{
