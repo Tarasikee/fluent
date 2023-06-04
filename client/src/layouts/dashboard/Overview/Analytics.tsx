@@ -1,6 +1,6 @@
 import React from 'react';
-import {api} from "../../store/api";
-import Loader from "../../components/Loader";
+import {api} from "../../../store/api";
+import Loader from "../../../components/Loader";
 import {Area, AreaChart, CartesianGrid, Tooltip, XAxis, YAxis} from 'recharts';
 import {Container, Row} from "react-bootstrap";
 
@@ -13,10 +13,6 @@ const Analytics = () => {
 
     return (
         <div>
-            <div className={"d-flex justify-content-between align-items-center mb-3"}>
-                <span className={"display-6"}>Analytics</span>
-            </div>
-
             {!data
                 ? <p>There is on data to analyze, then it`s time to start a business:)</p>
                 : <div>

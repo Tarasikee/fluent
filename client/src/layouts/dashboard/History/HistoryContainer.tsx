@@ -10,8 +10,9 @@ const HistoryContainer = () => {
     const [order, setOrder] = useState('');
     const [start, setStart] = useState('');
     const [end, setEnd] = useState('');
-    const {data, isLoading} = api.useFetchOrdersQuery({start, end, order});
     const [orders, setOrders] = useState<IOrder[]>([]);
+
+    const {data, isLoading} = api.useFetchOrdersQuery({start, end, order});
 
     useEffect(() => {
         if (data) {

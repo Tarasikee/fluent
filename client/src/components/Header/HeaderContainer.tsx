@@ -11,7 +11,6 @@ const HeaderContainer = () => {
 
     const links = [
         {to: '/admin/', name: 'Overview'},
-        {to: '/admin/analytics', name: 'Analytics'},
         {to: '/admin/history', name: 'History'},
         {to: '/admin/add-new-order', name: 'Order'},
         {to: '/admin/categories', name: 'Categories'}

@@ -4,8 +4,7 @@ import HeaderContainer from "./components/Header/HeaderContainer";
 import {ToastContainer} from "react-bootstrap";
 import Tooltip from "./components/Tooltip";
 import {Route, Routes} from "react-router-dom";
-import Overview from "./layouts/dashboard/Overview";
-import Analytics from "./layouts/dashboard/Analytics";
+import Overview from "./layouts/dashboard/Overview/Overview";
 import AddNewOrderContainer from "./layouts/dashboard/AddNewOrder/AddNewOrderContainer";
 import Categories from "./layouts/dashboard/Categories/Categories";
 import AdminLayout from "./layouts/dashboard/AdminLayout";
@@ -46,7 +45,6 @@ function App() {
 
             <Route path={'admin'} element={<PrivateRoute><AdminLayout /></PrivateRoute>}>
                 <Route path={''} element={<Overview />} />
-                <Route path={'analytics'} element={<Analytics />} />
                 <Route path={'history'} element={<HistoryContainer />} />
                 <Route path={'add-new-order'} element={<AddNewOrderLayout />}>
                     <Route path={''} element={<AddNewOrderContainer />} />

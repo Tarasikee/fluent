@@ -1,10 +1,10 @@
 import React from 'react';
 import {Card, Col, Container, Row} from "react-bootstrap";
 import {ArrowDown, ArrowUp} from "react-bootstrap-icons";
-import {api} from "../../store/api";
-import Loader from "../../components/Loader";
+import {api} from "../../../store/api";
+import Loader from "../../../components/Loader";
 
-const Overview = () => {
+const Stats = () => {
 
     const date = new Date();
     const yesterday = new Date(date.setDate(date.getDate() - 1)).toISOString().slice(0, 10);
@@ -71,4 +71,4 @@ const Overview = () => {
     );
 };
 
-export default Overview;
+export default Stats;
