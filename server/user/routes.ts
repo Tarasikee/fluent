@@ -11,7 +11,7 @@ const userRoutes = express.Router()
         '/register',
         controllers.register,
     )
-    .post(
+    .get(
         '/check',
         passport.authenticate('jwt', { session: false }),
         controllers.check,

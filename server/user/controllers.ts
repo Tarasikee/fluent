@@ -58,7 +58,9 @@ async function login(req: Request, res: Response) {
 
         return res.json({
             success: true,
-            token: `Bearer ${token}`,
+            data: {
+                token: `Bearer ${token}`,
+            },
         })
     } catch (e: unknown) {
         errorHandler(res, e as Error)
@@ -91,7 +93,10 @@ async function register(req: Request, res: Response) {
         const user = new userModel({ email, password })
 
         await user.save()
-        res.status(201).json(user)
+        res.status(201).json({
+            success: true,
+            data: user,
+        })
     } catch (e: unknown) {
         errorHandler(res, e as Error)
     }

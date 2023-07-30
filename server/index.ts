@@ -9,15 +9,14 @@ import express from 'express'
 async function initServer() {
     dotenv.config({ path: '../.env' })
 
-    const PORT = process.env.PORT || 3000
+    const PORT = process.env.SERVER_PORT || 3000
     const JWT_SECRET = process.env.JWT_ACCESS_SECRET || ''
     const app = express()
 
     await AppDB()
-
-    app.use(AppAuth(JWT_SECRET))
-    app.use(AppStatic)
-    app.use(AppRouter('/api'))
+    AppAuth(app, JWT_SECRET)
+    AppStatic(app)
+    AppRouter(app, '/api')
 
     app.listen(PORT, () => console.info(`Server running on port ${PORT}`))
 }

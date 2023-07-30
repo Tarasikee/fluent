@@ -6,12 +6,10 @@ import orderRoutes from '@order/routes'
 import positionRoutes from '@position/routes'
 import userRoutes from '@user/routes'
 
-const AppRouter = (path: string) => (app: Express) => {
+export default function AppRouter(app: Express, path: string) {
     app.use(`${path}/auth`, userRoutes)
     app.use(`${path}/category`, categoryRoutes)
     app.use(`${path}/position`, positionRoutes)
     app.use(`${path}/order`, orderRoutes)
     app.use(`${path}/analytics`, analyticsRoutes)
 }
-
-export default AppRouter
