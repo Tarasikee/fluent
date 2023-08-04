@@ -53,7 +53,7 @@ async function login(req: Request, res: Response) {
             id: candidate._id,
             email: candidate.email,
         }, process.env.JWT_ACCESS_SECRET as string, {
-            expiresIn: 60 * 60 * 24 * 30,
+            expiresIn: 60,
         })
 
         return res.json({

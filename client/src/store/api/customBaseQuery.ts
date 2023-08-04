@@ -1,4 +1,5 @@
 import { BaseQueryFn, FetchArgs, FetchBaseQueryError, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { message } from 'antd'
 import storageToken from '~/common/storageToken'
 
 const authQuery = fetchBaseQuery({
@@ -21,7 +22,7 @@ export const customBaseQuery: BaseQueryFn<string | FetchArgs, unknown, FetchBase
 ) => {
     const result = await authQuery(args, api, extraOptions)
 
-    if (result.error && result.error.status === 401) {
+    if (result.error && (result.error as { originalStatus: number }).originalStatus === 401) {
         storageToken.remove()
     }
 
