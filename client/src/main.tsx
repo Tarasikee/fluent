@@ -1,5 +1,5 @@
 import './index.css'
-import { App } from 'antd'
+import { App, ConfigProvider } from 'antd'
 import AppPage from '~/app/App.page'
 import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
@@ -15,12 +15,20 @@ if (!root) {
 
 createRoot(root).render(
     <StrictMode>
-        <App>
-            <Provider store={setupStore()}>
-                <BrowserRouter>
-                    <AppPage/>
-                </BrowserRouter>
-            </Provider>
-        </App>
+        <ConfigProvider
+            theme={{
+                token: {
+                    colorPrimary: '#000000',
+                },
+            }}
+        >
+            <App>
+                <Provider store={setupStore()}>
+                    <BrowserRouter>
+                        <AppPage/>
+                    </BrowserRouter>
+                </Provider>
+            </App>
+        </ConfigProvider>
     </StrictMode>,
 )

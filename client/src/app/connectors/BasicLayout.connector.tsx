@@ -10,6 +10,11 @@ export const BasicLayoutConnector: FC = () => {
     const location = useLocation()
     const { isLoading } = useCheckQuery(undefined, { skip: !token })
 
+    function logout() {
+        storageToken.remove()
+        window.location.reload()
+    }
+
     if (location.pathname === '/') {
         return <Navigate to="/login" replace/>
     }

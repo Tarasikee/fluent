@@ -26,6 +26,7 @@
         "react/no-unescaped-entities": "off",
         "react/display-name": "off",
         "react/react-in-jsx-scope": "off",
+        "no-empty-function": "off",
         "eqeqeq": "error",
         "jsx-quotes": ["error", "prefer-double"],
         "semi": [

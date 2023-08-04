@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
 type Args<T> = {
-    name: string
+    name: Readonly<string>
     initialState: T
 }
 

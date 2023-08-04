@@ -20,6 +20,11 @@ export const AdminLayoutConnector: FC = () => {
         { key: '/admin/category', icon: <UnorderedListOutlined/>, label: 'Category' },
     ]
 
+    function logout() {
+        storageToken.remove()
+        window.location.reload()
+    }
+
     if (!token || !user) {
         return <Navigate to="/login" state={{ from: location }} replace/>
     }
@@ -29,6 +34,7 @@ export const AdminLayoutConnector: FC = () => {
             current={location.pathname}
             onClick={({ key }) => navigate(key)}
             menuItems={menuItems}
+            logout={logout}
         >
             {isLoading ? <FullScreenLoader/> : <Outlet/>}
         </AdminLayout>

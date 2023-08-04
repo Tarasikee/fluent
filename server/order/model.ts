@@ -1,8 +1,19 @@
-import mongoose from 'mongoose'
+import { Schema, Types, model } from 'mongoose'
 
-const Schema = mongoose.Schema
+export type OrderItem = {
+    name: string
+    quantity: number
+    cost: number
+}
 
-const orderSchema = new Schema({
+export type Order = {
+    date: Date
+    order: number
+    list: OrderItem[]
+    user: Types.ObjectId
+}
+
+const orderSchema = new Schema<Order>({
     date: {
         type: Date,
         default: Date.now,
@@ -22,6 +33,6 @@ const orderSchema = new Schema({
     },
 })
 
-const orderModel = mongoose.model('orders', orderSchema)
+const orderModel = model<Order>('orders', orderSchema)
 
 export default orderModel

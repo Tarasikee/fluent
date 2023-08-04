@@ -4,6 +4,7 @@ import { customBaseQuery } from '~/store/api/customBaseQuery'
 export type Category = {
     _id: string
     name: string
+    description?: string
     imageSrc: string
 }
 
