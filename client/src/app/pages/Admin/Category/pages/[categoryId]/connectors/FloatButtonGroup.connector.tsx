@@ -34,7 +34,7 @@ export const FloatButtonGroupConnector: FC = () => {
         } catch (error) {
             message.error({ content: 'Something went wrong!' })
         } finally {
-            resetValues()
+            setTimeout(() => resetValues(), 1000)
         }
     }
 

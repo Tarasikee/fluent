@@ -13,7 +13,11 @@ export const ListItem: FC<{
     const [form] = Form.useForm()
     const [open, setOpen] = useState(false)
 
-    const closeModal = () => setOpen(false)
+    const closeModal = () => {
+        setOpen(false)
+        form.resetFields()
+    }
+
     const openModal = () => setOpen(true)
 
     async function onFormSubmit() {
