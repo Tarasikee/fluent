@@ -1,18 +1,34 @@
-The source code you see, represents CRM-system and its functionality.
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-Below you'll see how the system works and how does everything looks like.
+## Getting Started
 
-# Register
+First, run the development server:
 
-![Register page](https://i.ibb.co/ZLR5vKm/2022-03-21-18-04-07.png)
-When you first open CRM you'll see a register screen.
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+```
 
-After you had filled all information and then pressed submit button you'll see mistake you have:
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-![Register page mistakes](https://i.ibb.co/6H2BsHD/2022-03-21-18-15-56.png)
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-Or will redirect to Login Page:
+This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-![Login page](https://i.ibb.co/1723gfG/2022-03-21-18-19-54.png)
+## Learn More
 
-Functionality you see was made using `withFormik` <a href="https://formik.org/docs/api/withFormik">hook</a>
+To learn more about Next.js, take a look at the following resources:
+
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
