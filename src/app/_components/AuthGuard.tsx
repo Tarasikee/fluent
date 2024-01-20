@@ -3,7 +3,7 @@
 import { useSession } from 'next-auth/react'
 import { redirect, usePathname } from 'next/navigation'
 import { type FC, type PropsWithChildren } from 'react'
-import { LoadingSpinner } from './LoadingSpinner'
+import { LoadingSpinner } from '~/components'
 
 export const AuthGuard: FC<PropsWithChildren> = ({ children }) => {
     const { status } = useSession()

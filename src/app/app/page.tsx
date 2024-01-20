@@ -1,11 +1,9 @@
-import { LogoutButton } from './LogoutButton'
+import { Typography } from '~/components'
 
-export default function Page() {
+export default async function Page() {
     return (
         <div>
-            Hello in the app <br/>
-
-            <LogoutButton/>
+            <Typography.H1>Dashboard</Typography.H1>
         </div>
     )
 }

@@ -6,7 +6,8 @@ import { cookies } from 'next/headers'
 import { TRPCReactProvider } from '~/trpc/react'
 import { type ReactNode } from 'react'
 import { cn } from '~/lib/utils'
-import { AuthGuard, AuthProvider } from '~/components'
+import { AuthGuard } from './_components/AuthGuard'
+import { AuthProvider } from './_components/AuthProvider'
 
 const fontSans = FontSans({
     subsets: ['latin'],
