@@ -6,6 +6,7 @@ import { cookies } from 'next/headers'
 import { TRPCReactProvider } from '~/trpc/react'
 import { type ReactNode } from 'react'
 import { cn } from '~/lib/utils'
+import { AuthGuard, AuthProvider } from '~/components'
 
 const fontSans = FontSans({
     subsets: ['latin'],
@@ -26,7 +27,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                 fontSans.variable,
             )}>
                 <TRPCReactProvider cookies={cookies().toString()}>
-                    {children}
+                    <AuthProvider>
+                        <AuthGuard>
+                            {children}
+                        </AuthGuard>
+                    </AuthProvider>
                 </TRPCReactProvider>
             </body>
         </html>

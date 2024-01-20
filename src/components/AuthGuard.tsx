@@ -3,18 +3,16 @@
 import { useSession } from 'next-auth/react'
 import { redirect, usePathname } from 'next/navigation'
 import { type FC, type PropsWithChildren } from 'react'
+import { LoadingSpinner } from './LoadingSpinner'
 
-const AuthGuard: FC<PropsWithChildren> = ({ children }) => {
+export const AuthGuard: FC<PropsWithChildren> = ({ children }) => {
     const { status } = useSession()
     const pathname = usePathname()
 
     if (status === 'loading') {
         return (
             <div className="flex flex-col justify-center items-center h-screen">
-                <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-gray-900"></div>
-                <p className="mt-10">
-                    App is loading :)
-                </p>
+                <LoadingSpinner />
             </div>
         )
     }
@@ -37,5 +35,3 @@ const AuthGuard: FC<PropsWithChildren> = ({ children }) => {
 
     return children
 }
-
-export default AuthGuard
