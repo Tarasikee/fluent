@@ -8,10 +8,6 @@ export const env = createEnv({
             .default('development'),
         GOOGLE_CLIENT_ID: z.string().optional(),
         GOOGLE_CLIENT_SECRET: z.string().optional(),
-        NEXTAUTH_SECRET:
-            process.env.NODE_ENV === 'production'
-                ? z.string()
-                : z.string().optional(),
         POSTGRES_URL: z.string().url().optional(),
         POSTGRES_PRISMA_URL: z.string().url().optional(),
         POSTGRES_URL_NON_POOLING: z.string().url().optional(),
@@ -24,19 +20,18 @@ export const env = createEnv({
     client: {
     },
     runtimeEnv: {
-        GOOGLE_CLIENT_ID: undefined,
-        GOOGLE_CLIENT_SECRET: undefined,
+        GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
+        GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
 
-        NODE_ENV: undefined,
-        NEXTAUTH_SECRET: undefined,
+        NODE_ENV: process.env.NODE_ENV,
 
-        POSTGRES_URL: undefined,
-        POSTGRES_PRISMA_URL: undefined,
-        POSTGRES_URL_NON_POOLING: undefined,
-        POSTGRES_USER: undefined,
-        POSTGRES_HOST: undefined,
-        POSTGRES_PASSWORD: undefined,
-        POSTGRES_DATABASE: undefined,
+        POSTGRES_URL: process.env.POSTGRES_URL,
+        POSTGRES_PRISMA_URL: process.env.POSTGRES_PRISMA_URL,
+        POSTGRES_URL_NON_POOLING: process.env.POSTGRES_URL_NON_POOLING,
+        POSTGRES_USER: process.env.POSTGRES_USER,
+        POSTGRES_HOST: process.env.POSTGRES_HOST,
+        POSTGRES_PASSWORD: process.env.POSTGRES_PASSWORD,
+        POSTGRES_DATABASE: process.env.POSTGRES_DATABASE,
     },
     skipValidation: !!process.env.SKIP_ENV_VALIDATION,
     emptyStringAsUndefined: true,
