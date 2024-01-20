@@ -18,7 +18,11 @@ export const AuthGuard: FC<PropsWithChildren> = ({ children }) => {
     }
 
     if (pathname === '/' && status === 'unauthenticated') {
-        return children
+        redirect('/login')
+    }
+
+    if (pathname === '/' && status === 'authenticated') {
+        redirect('/app')
     }
 
     if (pathname === '/login' && status === 'unauthenticated') {
