@@ -6,24 +6,29 @@ export const env = createEnv({
         NODE_ENV: z
             .enum(['development', 'test', 'production'])
             .default('development'),
-        GOOGLE_CLIENT_ID: z.string().optional(),
-        GOOGLE_CLIENT_SECRET: z.string().optional(),
-        POSTGRES_URL: z.string().url().optional(),
-        POSTGRES_PRISMA_URL: z.string().url().optional(),
-        POSTGRES_URL_NON_POOLING: z.string().url().optional(),
+        NEXTAUTH_SECRET:
+            process.env.NODE_ENV === 'production'
+                ? z.string()
+                : z.string().optional(),
 
-        POSTGRES_USER: z.string().optional(),
-        POSTGRES_HOST: z.string().optional(),
-        POSTGRES_PASSWORD: z.string().optional(),
-        POSTGRES_DATABASE: z.string().optional(),
+        GOOGLE_CLIENT_ID: z.string(),
+        GOOGLE_CLIENT_SECRET: z.string(),
+
+        POSTGRES_URL: z.string().url(),
+        POSTGRES_PRISMA_URL: z.string().url(),
+        POSTGRES_URL_NON_POOLING: z.string().url(),
+        POSTGRES_USER: z.string(),
+        POSTGRES_HOST: z.string(),
+        POSTGRES_PASSWORD: z.string(),
+        POSTGRES_DATABASE: z.string(),
     },
-    client: {
-    },
+    client: {},
     runtimeEnv: {
+        NODE_ENV: process.env.NODE_ENV,
+        NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
+
         GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
         GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
-
-        NODE_ENV: process.env.NODE_ENV,
 
         POSTGRES_URL: process.env.POSTGRES_URL,
         POSTGRES_PRISMA_URL: process.env.POSTGRES_PRISMA_URL,
