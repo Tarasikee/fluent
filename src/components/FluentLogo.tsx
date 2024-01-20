@@ -1,7 +1,7 @@
 import { type FC, type ComponentProps } from 'react'
 
-export const BackgroundImage: FC<ComponentProps<'svg'>> = (props) => (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%" {...props}>
+export const FluentLogo: FC<ComponentProps<'svg'>> = (props) => (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" {...props}>
         <line x1="50" y1="100" x2="150" y2="100" stroke="white" strokeWidth="2"/>
         <line x1="100" y1="50" x2="100" y2="150" stroke="white" strokeWidth="2"/>
 

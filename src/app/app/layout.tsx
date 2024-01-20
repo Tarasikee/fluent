@@ -1,6 +1,7 @@
 import { type ReactNode } from 'react'
 import { MainNav } from './_components/MainNav'
 import { UserNav } from './_components/UserNav'
+import { TeamSwitcher } from './_components/TeamSwitcher'
 
 export const metadata = {
     title: 'Overview',
@@ -11,7 +12,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <div className="flex flex-col">
             <div className="border-b">
                 <div className="flex h-12 items-center px-4">
+                    <TeamSwitcher/>
                     <MainNav/>
+
                     <div className="ml-auto flex items-center space-x-4">
                         <UserNav/>
                     </div>

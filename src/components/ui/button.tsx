@@ -16,7 +16,10 @@ const buttonVariants = cva(
                 ghost: 'hover:bg-accent hover:text-accent-foreground',
                 link: 'text-primary underline-offset-4 hover:underline',
 
-                // colorful
+                // action
+                disabled: 'bg-gray-200 text-gray-400 shadow-sm hover:bg-gray-200/90 pointer-events-none',
+
+                // colorful'
                 blue: 'bg-blue-500 text-white shadow hover:bg-blue-600',
                 green: 'bg-emerald-500 text-white shadow hover:bg-emerald-600',
             },
