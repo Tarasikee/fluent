@@ -28,12 +28,12 @@ export const TeamSwitcher: FC<Props> = ({ teams }) => {
                         <CommandEmpty>No team found.</CommandEmpty>
                         <CommandGroup heading="Teams">
                             {teams.map((team, idx) =>
-                                <CommandItem key={team.id} onSelect={close} className="text-sm">
-                                    <Link href={`/app/${team.id}`}>
+                                <Link key={team.id} href={`/app/${team.id}`}>
+                                    <CommandItem onSelect={close} className="text-sm cursor-pointer">
                                         <span className="text-gray-500 mr-2">{idx + 1}. </span>
                                         <span>{team.name}</span>
-                                    </Link>
-                                </CommandItem>,
+                                    </CommandItem>
+                                </Link>,
                             )}
                         </CommandGroup>
                     </CommandList>

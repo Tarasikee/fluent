@@ -39,9 +39,9 @@ export function UserNav() {
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator/>
                 <DropdownMenuGroup>
-                    <DropdownMenuItem>
-                        <Link href="/user" replace>Profile</Link>
-                    </DropdownMenuItem>
+                    <Link className="cursor-pointer" href="/user" replace>
+                        <DropdownMenuItem>Profile</DropdownMenuItem>
+                    </Link>
                     <DropdownMenuItem>
                         Billing
                     </DropdownMenuItem>
