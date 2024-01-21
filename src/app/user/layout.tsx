@@ -1,5 +1,6 @@
-import { FluentLogo, Typography } from '~/components'
 import { type FC, type ReactNode } from 'react'
+
+import { FluentLogo, Typography } from '~/components'
 import { getServerAuthSession } from '~/server/auth'
 
 const Layout: FC<{ auth: ReactNode, teams: ReactNode }> = async ({ auth, teams }) => {
@@ -7,8 +8,7 @@ const Layout: FC<{ auth: ReactNode, teams: ReactNode }> = async ({ auth, teams }
     const isLogged = session !== null
 
     return (
-        <div
-            className="h-screen max-w-none grid grid-cols-1 container relative flex-col items-center justify-center px-0 lg:grid-cols-2">
+        <div className="h-screen max-w-none grid grid-cols-1 container relative flex-col items-center justify-center px-0 lg:grid-cols-2">
             <div className="relative hidden h-full flex-col items-center bg-zinc-900 p-10 text-white lg:flex">
                 <FluentLogo className="w-full h-full"/>
                 <Typography.H1>Fluent</Typography.H1>

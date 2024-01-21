@@ -2,18 +2,19 @@
 
 import { CaretSortIcon, CheckIcon, PlusCircledIcon } from '@radix-ui/react-icons'
 import { useState } from 'react'
-import { Popover, PopoverContent, PopoverTrigger } from '~/components/ui/popover'
+
+import { Avatar, AvatarFallback,AvatarImage } from '~/components/ui/avatar'
 import { Button } from '~/components/ui/button'
-import { Avatar, AvatarImage, AvatarFallback } from '~/components/ui/avatar'
 import {
     Command,
-    CommandInput,
     CommandEmpty,
     CommandGroup,
+    CommandInput,
     CommandItem,
     CommandList,
     CommandSeparator,
 } from '~/components/ui/command'
+import { Popover, PopoverContent, PopoverTrigger } from '~/components/ui/popover'
 
 export const TeamSwitcher = () => {
     const [open, setOpen] = useState(false)

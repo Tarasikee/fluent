@@ -1,17 +1,18 @@
 'use client'
 
+import { signOut,useSession } from 'next-auth/react'
+
+import { Avatar, AvatarFallback,AvatarImage } from '~/components/ui/avatar'
+import { Button } from '~/components/ui/button'
 import {
     DropdownMenu,
-    DropdownMenuTrigger,
     DropdownMenuContent,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
     DropdownMenuGroup,
     DropdownMenuItem,
+    DropdownMenuLabel,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger,
 } from '~/components/ui/dropdown-menu'
-import { Button } from '~/components/ui/button'
-import { Avatar, AvatarImage, AvatarFallback } from '~/components/ui/avatar'
-import { useSession, signOut } from 'next-auth/react'
 
 export function UserNav() {
     const session = useSession()

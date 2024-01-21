@@ -1,8 +1,9 @@
 'use client'
 
 import { GitHubLogoIcon, VercelLogoIcon } from '@radix-ui/react-icons'
-import { Button } from '~/components/ui/button'
 import { signIn } from 'next-auth/react'
+
+import { Button } from '~/components/ui/button'
 
 export const LoginButton = () => (
     <div className="flex flex-col space-y-3">

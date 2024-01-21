@@ -7,7 +7,7 @@ export const AuthGuard: FC<PropsWithChildren> = ({ children }) => {
     const pathname = usePathname()
 
     if (pathname === '/') {
-        redirect('/login')
+        redirect('/user')
     }
 
     return children

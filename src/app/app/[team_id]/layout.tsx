@@ -1,13 +1,25 @@
-import { type ReactNode } from 'react'
+import { redirect } from 'next/navigation'
+import { type FC, type PropsWithChildren } from 'react'
+
+import { db } from '~/server/db'
+
 import { MainNav } from './_components/MainNav'
-import { UserNav } from './_components/UserNav'
 import { TeamSwitcher } from './_components/TeamSwitcher'
+import { UserNav } from './_components/UserNav'
 
 export const metadata = {
     title: 'Overview',
 }
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+const RootLayout: FC<PropsWithChildren<{ params: { team_id: string } }>> = async ({ children, params }) => {
+    const teamId = params.team_id
+    const team = await db.team.findUnique({ where: { id: teamId } })
+
+
+    if (!team) {
+        return redirect('/user')
+    }
+
     return (
         <div className="flex flex-col">
             <div className="border-b">
@@ -27,3 +39,5 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         </div>
     )
 }
+
+export default RootLayout

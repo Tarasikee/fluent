@@ -1,9 +1,10 @@
 'use client'
 
-import { usePathname } from 'next/navigation'
-import { Button } from '~/components/ui/button'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { type FC } from 'react'
+
+import { Button } from '~/components/ui/button'
 
 type Props = {
     href: string

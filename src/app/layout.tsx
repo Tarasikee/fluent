@@ -1,11 +1,10 @@
 import '~/styles/globals.css'
 
 import { Inter as FontSans } from 'next/font/google'
-import { cookies } from 'next/headers'
-
-import { TRPCReactProvider } from '~/trpc/react'
 import { type ReactNode } from 'react'
+
 import { cn } from '~/lib/utils'
+
 import { AuthGuard } from './_components/AuthGuard'
 import { AuthProvider } from './_components/AuthProvider'
 
@@ -27,13 +26,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                 'min-h-screen bg-background font-sans antialiased',
                 fontSans.variable,
             )}>
-                <TRPCReactProvider cookies={cookies().toString()}>
-                    <AuthProvider>
-                        <AuthGuard>
-                            {children}
-                        </AuthGuard>
-                    </AuthProvider>
-                </TRPCReactProvider>
+                <AuthProvider>
+                    <AuthGuard>
+                        {children}
+                    </AuthGuard>
+                </AuthProvider>
             </body>
         </html>
     )

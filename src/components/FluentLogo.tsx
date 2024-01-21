@@ -1,4 +1,4 @@
-import { type FC, type ComponentProps } from 'react'
+import { type ComponentProps,type FC } from 'react'
 
 export const FluentLogo: FC<ComponentProps<'svg'>> = (props) => (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" {...props}>

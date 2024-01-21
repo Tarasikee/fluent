@@ -1,5 +1,6 @@
-import { LoginButton } from './LoginButton'
 import { Typography } from '~/components'
+
+import { LoginButton } from './LoginButton'
 
 export default function Page() {
     return (
