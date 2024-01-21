@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { type FC } from 'react'
 
-import { Button } from '~/components/ui/button'
+import { cn } from '~/lib/utils'
 
 type Props = {
     href: string
@@ -16,10 +16,11 @@ export const NavLink: FC<Props> = ({ href, label }) => {
     const isActive = pathname === href
 
     return (
-        <Button asChild variant={isActive ? 'default' : 'ghost'}>
-            <Link href={href}>
-                {label}
-            </Link>
-        </Button>
+        <Link href={href} className={cn(
+            'text-sm font-medium hover:text-primary',
+            isActive ? 'transition-colors' : 'text-muted-foreground hover:text-primary',
+        )}>
+            {label}
+        </Link>
     )
 }

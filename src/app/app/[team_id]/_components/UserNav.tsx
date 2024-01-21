@@ -1,8 +1,9 @@
 'use client'
 
-import { signOut,useSession } from 'next-auth/react'
+import Link from 'next/link'
+import { signOut, useSession } from 'next-auth/react'
 
-import { Avatar, AvatarFallback,AvatarImage } from '~/components/ui/avatar'
+import { Avatar, AvatarFallback, AvatarImage } from '~/components/ui/avatar'
 import { Button } from '~/components/ui/button'
 import {
     DropdownMenu,
@@ -39,7 +40,7 @@ export function UserNav() {
                 <DropdownMenuSeparator/>
                 <DropdownMenuGroup>
                     <DropdownMenuItem>
-                        Profile
+                        <Link href="/user" replace>Profile</Link>
                     </DropdownMenuItem>
                     <DropdownMenuItem>
                         Billing

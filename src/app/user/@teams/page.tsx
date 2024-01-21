@@ -1,3 +1,4 @@
+import { TeamSwitcher } from '~/app/user/@teams/_components/TeamSwitcher'
 import { LogoutButton } from '~/components'
 import { getUser } from '~/lib/actions'
 import { db } from '~/server/db'
@@ -14,12 +15,12 @@ export default async function Page() {
     return (
         <div className="grid gap-6">
             <LogoutButton className="absolute top-2 right-2"/>
-
             {user?.name && <ProfileInfo username={user.name} isMember={isMember} teamsAmount={myTeams.length}/>}
-
             <CreateTeamModal/>
-
-            {isMember && <Separator/>}
+            {isMember && <>
+                <Separator/>
+                <TeamSwitcher teams={myTeams}/>
+            </>}
         </div>
     )
 }

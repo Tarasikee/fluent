@@ -1,10 +1,10 @@
 import { redirect } from 'next/navigation'
 import { type FC, type PropsWithChildren } from 'react'
 
+import { Typography } from '~/components'
 import { db } from '~/server/db'
 
 import { MainNav } from './_components/MainNav'
-import { TeamSwitcher } from './_components/TeamSwitcher'
 import { UserNav } from './_components/UserNav'
 
 export const metadata = {
@@ -24,8 +24,8 @@ const RootLayout: FC<PropsWithChildren<{ params: { team_id: string } }>> = async
         <div className="flex flex-col">
             <div className="border-b">
                 <div className="flex h-12 items-center px-4">
-                    <TeamSwitcher/>
-                    <MainNav/>
+                    <Typography.H4>{team.name}</Typography.H4>
+                    <MainNav teamId={teamId}/>
 
                     <div className="ml-auto flex items-center space-x-4">
                         <UserNav/>
