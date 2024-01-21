@@ -2,7 +2,6 @@
 
 import { GitHubLogoIcon, VercelLogoIcon } from '@radix-ui/react-icons'
 import { Button } from '~/components/ui/button'
-import * as React from 'react'
 import { signIn } from 'next-auth/react'
 
 export const LoginButton = () => (

@@ -1,9 +1,5 @@
-import { Typography } from '~/components'
+import { redirect } from 'next/navigation'
 
-export default async function Page() {
-    return (
-        <div>
-            <Typography.H2>Dashboard</Typography.H2>
-        </div>
-    )
+export default function Page() {
+    return redirect('/login')
 }

@@ -20,22 +20,22 @@ model Team {
   updatedAt DateTime @updatedAt
 
   creatorId String
-  creator   User   @relation(fields: [creatorId], references: [id], onDelete: Cascade)
-  // members   Member[]
+  creator   User     @relation(fields: [creatorId], references: [id], onDelete: Cascade)
+  members   Member[]
 }
 
-// model Member {
-//   id        String   @id @default(cuid())
-//   createdAt DateTime @default(now())
-//   updatedAt DateTime @updatedAt
-//   role      Role     @default(MEMBER)
-//   teamId    String
-//   userId    String
-//   team      Team     @relation(fields: [teamId], references: [id], onDelete: Cascade)
-//   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-//
-//   @@unique([teamId, userId])
-// }
+model Member {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  role      Role     @default(MEMBER)
+  teamId    String
+  userId    String
+  team      Team     @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([teamId, userId])
+}
 
 model User {
   id            String    @id @default(cuid())
@@ -45,8 +45,8 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
-  // Member        Member[]
   Team          Team[]
+  Member        Member[]
 }
 
 // Necessary for Next auth

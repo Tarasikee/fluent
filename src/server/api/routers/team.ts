@@ -1,9 +1,13 @@
 import { createTRPCRouter, protectedProcedure } from '../trpc'
 
 export const teamRouter = createTRPCRouter({
-    getMy: protectedProcedure.query(({ ctx }) => ctx.db.team.findUnique({
+    getMy: protectedProcedure.query(({ ctx }) => ctx.db.team.findMany({
         where: {
-            id: ctx.session.user.id,
+            members: {
+                some: {
+                    userId: ctx.session.user.id,
+                },
+            },
         },
     })),
 })
