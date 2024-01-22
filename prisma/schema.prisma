@@ -22,6 +22,16 @@ model Team {
   creatorId String
   creator   User     @relation(fields: [creatorId], references: [id], onDelete: Cascade)
   members   Member[]
+  Invite    Invite[]
+}
+
+model Invite {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  email     String
+  teamId    String
+  team      Team     @relation(fields: [teamId], references: [id], onDelete: Cascade)
 }
 
 model Member {

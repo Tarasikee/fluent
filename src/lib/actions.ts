@@ -8,3 +8,8 @@ export async function getUser() {
     if (!session?.user?.id) return null
     return db.user.findUnique({ where: { id: session.user.id } })
 }
+
+export async function getUserTeams() {
+    const user = await getUser()
+    return db.team.findMany({ where: { members: { some: { user: user! } } } })
+}

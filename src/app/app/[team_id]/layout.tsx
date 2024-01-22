@@ -2,6 +2,7 @@ import { redirect } from 'next/navigation'
 import { type FC, type PropsWithChildren } from 'react'
 
 import { Typography } from '~/components'
+import { getUser } from '~/lib/actions'
 import { db } from '~/server/db'
 
 import { MainNav } from './_components/MainNav'
@@ -12,9 +13,14 @@ export const metadata = {
 }
 
 const RootLayout: FC<PropsWithChildren<{ params: { team_id: string } }>> = async ({ children, params }) => {
+    const user = await getUser()
     const teamId = params.team_id
-    const team = await db.team.findUnique({ where: { id: teamId } })
-
+    const team = await db.team.findUnique({
+        where: {
+            id: teamId,
+            members: { some: { user: { id: user?.id } } },
+        },
+    })
 
     if (!team) {
         return redirect('/user')

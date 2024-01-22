@@ -5,7 +5,6 @@ import { type ReactNode } from 'react'
 
 import { cn } from '~/lib/utils'
 
-import { AuthGuard } from './_components/AuthGuard'
 import { AuthProvider } from './_components/AuthProvider'
 import { Providers } from './_components/Providers'
 
@@ -23,15 +22,10 @@ export const metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
     return (
         <html lang="en">
-            <body className={cn(
-                'min-h-screen bg-background font-sans antialiased',
-                fontSans.variable,
-            )}>
+            <body className={cn('min-h-screen bg-background font-sans antialiased', fontSans.variable)}>
                 <Providers>
                     <AuthProvider>
-                        <AuthGuard>
-                            {children}
-                        </AuthGuard>
+                        {children}
                     </AuthProvider>
                 </Providers>
             </body>
