@@ -38,11 +38,16 @@ model Member {
   id        String   @id @default(cuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  role      Role     @default(MEMBER)
-  teamId    String
-  userId    String
-  team      Team     @relation(fields: [teamId], references: [id], onDelete: Cascade)
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  role Role @default(MEMBER)
+  // position
+  // projects
+  // tasks
+
+  teamId String
+  userId String
+  team   Team   @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([teamId, userId])
 }

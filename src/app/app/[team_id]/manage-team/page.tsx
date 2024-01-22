@@ -1,9 +1,9 @@
-import { Typography } from '~/components'
+import { Header } from './_components/Header'
 
 export default async function Page() {
     return (
-        <div>
-            <Typography.H2>Manage yor team</Typography.H2>
-        </div>
+        <>
+            <Header/>
+        </>
     )
 }

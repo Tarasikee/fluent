@@ -17,7 +17,7 @@ export async function middleware(request: NextRequest) {
         return NextResponse.redirect(userUrl)
     }
 
-    if (pathname.startsWith('/app') && !isNullish(authCookie)) {
+    if (pathname.startsWith('/app') && isNullish(authCookie)) {
         return NextResponse.redirect(userUrl)
     }
 
