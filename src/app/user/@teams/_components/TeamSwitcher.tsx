@@ -21,7 +21,7 @@ export const TeamSwitcher: FC<Props> = ({ teams }) => {
             <PopoverTrigger asChild>
                 <Button>Find your team</Button>
             </PopoverTrigger>
-            <PopoverContent className="p-0">
+            <PopoverContent align="start" className="p-0">
                 <Command>
                     <CommandList>
                         <CommandInput placeholder="Search team..."/>

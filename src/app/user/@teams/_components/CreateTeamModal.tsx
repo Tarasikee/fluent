@@ -2,24 +2,15 @@
 
 import { PlusIcon } from '@radix-ui/react-icons'
 import { type FC } from 'react'
-import { useFormState, useFormStatus } from 'react-dom'
+import { useFormState } from 'react-dom'
 
+import { SubmitButton } from '~/components'
 import { Button } from '~/components/ui/button'
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle,DialogTrigger } from '~/components/ui/dialog'
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '~/components/ui/dialog'
 import { Input } from '~/components/ui/input'
 import { Label } from '~/components/ui/label'
 
 import { createTeam } from '../action'
-
-const SubmitButton = () => {
-    const { pending } = useFormStatus()
-
-    return (
-        <Button type="submit" variant={pending ? 'disabled' : 'default'}>
-            {pending ? 'Creating...' : 'Create team'}
-        </Button>
-    )
-}
 
 export const CreateTeamModal: FC = () => {
     const [formState, formAction] = useFormState(createTeam, { errors: { teamName: [] } })
@@ -50,7 +41,7 @@ export const CreateTeamModal: FC = () => {
                         </div>
                     </div>
                     <DialogFooter>
-                        <SubmitButton/>
+                        <SubmitButton label="Create team" loadingLabel="Creating..." />
                     </DialogFooter>
                 </form>
             </DialogContent>

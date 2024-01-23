@@ -1,3 +1,4 @@
+import { Notifications } from '~/app/user/@teams/_components/Notifications'
 import { LogoutButton } from '~/components'
 import { getUser, getUserTeams } from '~/lib/actions'
 
@@ -13,7 +14,10 @@ export default async function Page() {
 
     return (
         <div className="grid gap-6">
-            <LogoutButton className="absolute top-2 right-2"/>
+            <div className="flex space-x-4 absolute top-2 right-2">
+                <Notifications/>
+                <LogoutButton/>
+            </div>
             {user?.name && <ProfileInfo username={user.name} isMember={isMember} teamsAmount={userTeams.length}/>}
             <CreateTeamModal/>
             {isMember && <>

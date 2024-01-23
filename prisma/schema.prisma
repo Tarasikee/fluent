@@ -40,9 +40,6 @@ model Member {
   updatedAt DateTime @updatedAt
 
   role Role @default(MEMBER)
-  // position
-  // projects
-  // tasks
 
   teamId String
   userId String
