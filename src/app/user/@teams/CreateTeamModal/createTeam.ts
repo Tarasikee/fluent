@@ -48,9 +48,8 @@ export async function createTeam(_: unknown, formData: FormData) {
                 creatorId: user.id,
             },
         })
+        redirect(`/app/${newTeam.id}`)
     } catch (e) {
         return { errors: { teamName: 'Something went wrong, try again or later' } }
     }
-
-    redirect(`/fluent/${newTeam.id}`)
 }

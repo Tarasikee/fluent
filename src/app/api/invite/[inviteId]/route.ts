@@ -60,7 +60,7 @@ export async function DELETE(request: Request, context: Params) {
             },
         })
 
-        const appUrl = new URL(`/fluent/${invite.teamId}`, request.url)
+        const appUrl = new URL(`/app/${invite.teamId}`, request.url)
         return Response.redirect(appUrl.toString())
     } catch (e) {
         console.error(e)
