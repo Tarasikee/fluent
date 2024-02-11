@@ -11,8 +11,8 @@ function isAcceptance(acceptance: string): acceptance is Acceptance {
 
 type Params = { params: { inviteId: string } }
 
-export async function PUT(request: Request, { params }: Params) {
-    const inviteId = params.inviteId
+export async function PUT(request: Request, context: Params) {
+    const inviteId = context.params.inviteId
     const res = await request.text()
 
     if (!isAcceptance(res)) {
@@ -32,8 +32,8 @@ export async function PUT(request: Request, { params }: Params) {
 
 // We use delete to remove invitation and add user to team
 // As we don't have accepted status for invite and if invite doesn't exist we can say that user is in team
-export async function DELETE(_: Request, { params }: Params) {
-    const inviteId = params.inviteId
+export async function DELETE(request: Request, context: Params) {
+    const inviteId = context.params.inviteId
 
     try {
         const user = await getUser()
@@ -59,8 +59,11 @@ export async function DELETE(_: Request, { params }: Params) {
                 },
             },
         })
-        return Response.json({ success: true })
+
+        const appUrl = new URL(`/app/${invite.teamId}`, request.url)
+        return Response.redirect(appUrl.toString())
     } catch (e) {
+        console.error(e)
         return Response.error()
     }
 }

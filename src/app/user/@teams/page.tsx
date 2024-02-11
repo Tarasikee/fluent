@@ -2,8 +2,8 @@ import { LogoutButton } from '~/components'
 import { getUser, getUserTeams } from '~/lib/actions'
 import { db } from '~/server/db'
 
-import { CreateTeamModal } from './CreateTeamModal'
-import { Notifications } from './Notifications'
+import { CreateTeamModal } from './CreateTeamModal/CreateTeamModal'
+import { Notifications } from './Notifications/Notifications'
 import { ProfileInfo } from './ProfileInfo'
 import { TeamSwitcher } from './TeamSwitcher'
 

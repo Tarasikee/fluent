@@ -1,16 +1,17 @@
 'use client'
 
 import { type Invite, type Team } from '@prisma/client'
-import { useSetAtom } from 'jotai'
+import { BellIcon } from '@radix-ui/react-icons'
+import { useAtomValue, useSetAtom } from 'jotai'
 import { useHydrateAtoms } from 'jotai/utils'
 import { type FC, useEffect } from 'react'
 
-import { Popover } from '~/components/ui/popover'
+import { Button } from '~/components/ui/button'
+import { Popover, PopoverTrigger } from '~/components/ui/popover'
 import { clientOnInvite, clientSubscribeToInvite, clientUnsubscribeFromInvite } from '~/lib/pusher/invite'
 
-import { invitesWithTeamAtom } from './atoms'
+import { invitesWithTeamAtom, invitesWithTeamCountAtom } from './atoms'
 import { Content } from './Content'
-import { Trigger } from './Trigger'
 
 type InviteWithTeam = Invite & { team: Team }
 
@@ -22,6 +23,7 @@ type Props = {
 export const Notifications: FC<Props> = ({ invitesWithTeam: invitesWithTeamFromServer, userEmail }) => {
     useHydrateAtoms([[invitesWithTeamAtom, invitesWithTeamFromServer]])
     const setInvitesWithTeam = useSetAtom(invitesWithTeamAtom)
+    const invitesCount = useAtomValue(invitesWithTeamCountAtom)
 
     useEffect(() => {
         if (!userEmail) return
@@ -44,7 +46,16 @@ export const Notifications: FC<Props> = ({ invitesWithTeam: invitesWithTeamFromS
 
     return (
         <Popover>
-            <Trigger/>
+            <PopoverTrigger asChild>
+                <Button size="icon" variant="outline" className="relative">
+                    <BellIcon/>
+                    {invitesCount > 0 &&
+                        <div className="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-primary border-2 border-white rounded-full -top-2 -end-2">
+                            {invitesCount}
+                        </div>
+                    }
+                </Button>
+            </PopoverTrigger>
             <Content/>
         </Popover>
     )

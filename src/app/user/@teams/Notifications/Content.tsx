@@ -33,16 +33,15 @@ export const Content = () => {
         }
     }
 
-    async function acceptInvite(id: string, teamId: string) {
+    async function acceptInvite(id: string) {
         try {
-            await fetch(`/api/invite/${id}`, { method: 'DELETE' }).then((response) => {
-                if (response.ok) return response.json()
-                throw new Error('Something went wrong')
-            })
+            const response = await fetch(`/api/invite/${id}`, { method: 'DELETE', redirect: 'follow' })
+            router.push(response.url)
             toast.success('Invitation accepted. Redirecting...')
-            router.push(`/app/${teamId}`)
         } catch {
             toast.error('Failed to accept invite. Try again later.')
+        } finally {
+
         }
     }
 
@@ -59,7 +58,7 @@ export const Content = () => {
                         <span className="font-bold">{invite.team.name}</span>
                     </p>
                     <div className="flex space-x-2 mt-2">
-                        <Button size="sm" onClick={() => acceptInvite(invite.id, invite.team.id)}>
+                        <Button size="sm" onClick={() => acceptInvite(invite.id)}>
                             Accept
                         </Button>
                         <Button size="sm" variant="destructive" onClick={() => declineInvite(invite.id)}>
