@@ -8,8 +8,9 @@ import { type ReactNode } from 'react'
 import { Toaster } from '~/components/ui/sonner'
 import { cn } from '~/lib/utils'
 
-import { AuthProvider } from './AuthProvider'
-import { JotaiProvider } from './JotaiProvider'
+import { AuthProvider } from './Providers/AuthProvider'
+import { JotaiProvider } from './Providers/JotaiProvider'
+import { ProgressBarProvider } from './Providers/ProgressBarProvider'
 
 const fontSans = FontSans({
     subsets: ['latin'],
@@ -26,11 +27,13 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     return (
         <html lang="en">
             <body className={cn('min-h-screen bg-background font-sans antialiased', fontSans.variable)}>
-                <JotaiProvider>
-                    <AuthProvider>
-                        {children}
-                    </AuthProvider>
-                </JotaiProvider>
+                <ProgressBarProvider>
+                    <JotaiProvider>
+                        <AuthProvider>
+                            {children}
+                        </AuthProvider>
+                    </JotaiProvider>
+                </ProgressBarProvider>
                 <Toaster/>
                 <Analytics/>
                 <SpeedInsights/>
