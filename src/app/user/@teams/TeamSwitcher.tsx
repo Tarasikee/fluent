@@ -14,7 +14,7 @@ export const TeamSwitcher: FC<Props> = ({ teams }) => (
     <ScrollArea className="max-h-72 w-full rounded-md border">
         <div className="p-4">
             {teams.map((team, idx) =>
-                <Link key={team.id} href={`/app/${team.id}`}>
+                <Link key={team.id} href={`/fluent/${team.id}`}>
                     <span>{team.name}</span>
                     <Separator className={cn(idx === teams.length - 1 ? 'hidden' : 'my-2')}/>
                 </Link>,

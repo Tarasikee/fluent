@@ -19,7 +19,7 @@ const RootLayout: FC<PropsWithChildren<{ params: { team_id: string } }>> = async
     const team = await db.team.findUnique({ where: { id: teamId, members: { some: { user: { id: user?.id } } } } })
     console.log(user, teamId, team)
 
-    // const mainUrl = `/app/${teamId}`
+    // const mainUrl = `/fluent/${teamId}`
     //
     // const routes = [
     //     { href: mainUrl, label: 'Overview' },
