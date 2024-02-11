@@ -10,7 +10,6 @@ import { cn } from '~/lib/utils'
 
 import { AuthProvider } from './AuthProvider'
 import { JotaiProvider } from './JotaiProvider'
-import { ProgressBarProvider } from './ProgressBarProvider'
 
 const fontSans = FontSans({
     subsets: ['latin'],
@@ -27,13 +26,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     return (
         <html lang="en">
             <body className={cn('min-h-screen bg-background font-sans antialiased', fontSans.variable)}>
-                <ProgressBarProvider>
-                    <JotaiProvider>
-                        <AuthProvider>
-                            {children}
-                        </AuthProvider>
-                    </JotaiProvider>
-                </ProgressBarProvider>
+                <JotaiProvider>
+                    <AuthProvider>
+                        {children}
+                    </AuthProvider>
+                </JotaiProvider>
                 <Toaster/>
                 <Analytics/>
                 <SpeedInsights/>
