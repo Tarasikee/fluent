@@ -2,9 +2,9 @@
 
 import { z } from 'zod'
 
+import { getUser } from '~/lib/actions'
 import { serverInvite } from '~/lib/pusher/invite'
 import { db } from '~/server/db'
-import { getUser } from '~/lib/actions'
 
 const schema = z.object({
     email: z.string().email({ message: 'Invalid email' }),
