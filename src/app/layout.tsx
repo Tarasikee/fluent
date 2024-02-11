@@ -1,6 +1,7 @@
 import '~/styles/globals.css'
 
 import { Analytics } from '@vercel/analytics/react'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 import { Inter as FontSans } from 'next/font/google'
 import { type ReactNode } from 'react'
 
@@ -35,6 +36,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                 </ProgressBarProvider>
                 <Toaster/>
                 <Analytics/>
+                <SpeedInsights/>
             </body>
         </html>
     )
