@@ -13,11 +13,12 @@ export const metadata = {
 }
 
 const RootLayout: FC<PropsWithChildren<{ params: { team_id: string } }>> = async ({ children, params }) => {
-    // const user = await getUser()
-    // const teamId = params.team_id
-    //
-    // const team = await db.team.findUnique({ where: { id: teamId, members: { some: { user: { id: user?.id } } } } })
-    //
+    const user = await getUser()
+    const teamId = params.team_id
+
+    const team = await db.team.findUnique({ where: { id: teamId, members: { some: { user: { id: user?.id } } } } })
+    console.log(user, teamId, team)
+
     // const mainUrl = `/app/${teamId}`
     //
     // const routes = [
