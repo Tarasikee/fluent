@@ -2,8 +2,9 @@
 
 import { PlusIcon } from '@radix-ui/react-icons'
 import { useParams } from 'next/navigation'
-import { type FC } from 'react'
+import { type FC, useEffect, useState } from 'react'
 import { useFormState } from 'react-dom'
+import { toast } from 'sonner'
 
 import { SubmitButton, Typography } from '~/components'
 import { Button } from '~/components/ui/button'
@@ -15,13 +16,22 @@ import { sendInvite } from '../action'
 
 export const Header: FC = () => {
     const params = useParams()
+
+    const [isDialogOpen, setIsDialogOpen] = useState(false)
     const [formState, formAction] = useFormState(sendInvite, { errors: { email: [] } })
+
+    useEffect(() => {
+        if (formState?.success) {
+            setIsDialogOpen(false)
+            toast.success('Invitation sent')
+        }
+    }, [formState?.success])
 
     return (
         <div className="flex justify-between items-center">
-            <Typography.H2>Manage yor team</Typography.H2>
+            <Typography.H2>Manage your team</Typography.H2>
 
-            <Dialog>
+            <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
                 <DialogTrigger asChild>
                     <Button variant="blue">
                         <PlusIcon className="mr-2 h-4 w-4"/>
@@ -45,7 +55,7 @@ export const Header: FC = () => {
                             </div>
                         </div>
                         <DialogFooter>
-                            <SubmitButton label="Sent request" loadingLabel="Sendng..."/>
+                            <SubmitButton label="Sent request" loadingLabel="Sending..."/>
                         </DialogFooter>
                     </form>
                 </DialogContent>

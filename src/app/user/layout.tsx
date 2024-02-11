@@ -8,14 +8,20 @@ const Layout: FC<{ auth: ReactNode, teams: ReactNode }> = async ({ auth, teams }
     const isLogged = session !== null
 
     return (
-        <div className="h-screen max-w-none grid grid-cols-1 container relative flex-col items-center justify-center px-0 lg:grid-cols-2">
-            <div className="relative hidden h-full flex-col items-center bg-zinc-900 p-10 text-white lg:flex">
-                <FluentLogo className="w-full h-full"/>
-                <Typography.H1>Fluent</Typography.H1>
-                <p>The bug tracking system</p>
+        <div className="h-screen grid grid-cols-2">
+            <div className="bg-zinc-900 p-10 text-white">
+                <div className="h-full flex flex-col justify-between">
+                    <div className="flex items-center justify-start">
+                        <FluentLogo className="w-[90px]"/>
+                        <Typography.H1>Fluent</Typography.H1>
+                    </div>
+                    <p>
+                        Fluent is a bug tracking tool that helps you plan, manage, and release great software.
+                    </p>
+                </div>
             </div>
-            <div className="lg:p-8">
-                <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
+            <div className="flex w-full justify-center items-center">
+                <div className="p-8 w-[500px]">
                     {isLogged ? teams : auth}
                 </div>
             </div>

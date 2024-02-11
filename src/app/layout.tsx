@@ -3,6 +3,7 @@ import '~/styles/globals.css'
 import { Inter as FontSans } from 'next/font/google'
 import { type ReactNode } from 'react'
 
+import { Toaster } from '~/components/ui/sonner'
 import { cn } from '~/lib/utils'
 
 import { AuthProvider } from './_components/AuthProvider'
@@ -28,6 +29,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                         {children}
                     </AuthProvider>
                 </Providers>
+                <Toaster/>
             </body>
         </html>
     )

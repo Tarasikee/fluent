@@ -21,8 +21,13 @@ export const env = createEnv({
         POSTGRES_HOST: z.string(),
         POSTGRES_PASSWORD: z.string(),
         POSTGRES_DATABASE: z.string(),
+
+        PUSHER_APP_ID: z.string(),
+        PUSHER_APP_SECRET: z.string(),
     },
-    client: {},
+    client: {
+        NEXT_PUBLIC_PUSHER_APP_KEY: z.string(),
+    },
     runtimeEnv: {
         NODE_ENV: process.env.NODE_ENV,
         NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
@@ -37,6 +42,10 @@ export const env = createEnv({
         POSTGRES_HOST: process.env.POSTGRES_HOST,
         POSTGRES_PASSWORD: process.env.POSTGRES_PASSWORD,
         POSTGRES_DATABASE: process.env.POSTGRES_DATABASE,
+
+        PUSHER_APP_ID: process.env.PUSHER_APP_ID,
+        NEXT_PUBLIC_PUSHER_APP_KEY: process.env.NEXT_PUBLIC_PUSHER_APP_KEY,
+        PUSHER_APP_SECRET: process.env.PUSHER_APP_SECRET,
     },
     skipValidation: !!process.env.SKIP_ENV_VALIDATION,
     emptyStringAsUndefined: true,
