@@ -50,10 +50,17 @@ export async function sendInvite(_: unknown, formData: FormData) {
             }
         }
 
-        const isEmailAlreadyInvited = await db.invite.findFirst({ where: { email, teamId } })
-        if (isEmailAlreadyInvited) {
+        const isPending = await db.invite.findFirst({ where: { email, teamId, accepted: 'PENDING' } })
+        if (isPending) {
             return {
                 errors: { email: 'User is already invited. Please wait for the user to accept the invitation' },
+            }
+        }
+
+        const isRejected = await db.invite.findFirst({ where: { email, teamId, accepted: 'REJECTED' } })
+        if (isRejected) {
+            return {
+                errors: { email: 'User rejected the invitation. Re-request it in canceled invites tab' },
             }
         }
 
