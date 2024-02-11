@@ -18,6 +18,7 @@ const buttonVariants = cva(
 
                 // action
                 disabled: 'bg-gray-200 text-gray-400 shadow-sm hover:bg-gray-200/90 pointer-events-none',
+                'like-disabled': 'bg-gray-200 text-gray-400 shadow-sm hover:bg-gray-200 cursor-default',
 
                 // colorful'
                 blue: 'bg-blue-500 text-white shadow hover:bg-blue-600',

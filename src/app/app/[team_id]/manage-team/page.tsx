@@ -2,6 +2,7 @@ import { getUser } from '~/lib/actions'
 import { db } from '~/server/db'
 
 import { AddTeamMember } from './AddTeamMember/AddTeamMember'
+import { NoRightToAdd } from './AddTeamMember/NoRightToAdd'
 import { TableFilters } from './TeamTable/TableFilters'
 import { TeamTable } from './TeamTable/TeamTable'
 
@@ -14,7 +15,10 @@ export default async function Page({ params }: { params: { team_id: string } }) 
         <div>
             <div className="flex justify-between items-center">
                 <TableFilters/>
-                {member?.role !== 'MEMBER' && <AddTeamMember/>}
+                {member?.role !== 'MEMBER'
+                    ? <AddTeamMember/>
+                    : <NoRightToAdd/>
+                }
             </div>
 
             <TeamTable />
