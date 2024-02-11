@@ -2,16 +2,17 @@ import { LogoutButton } from '~/components'
 import { getUser, getUserTeams } from '~/lib/actions'
 import { db } from '~/server/db'
 
-import { CreateTeamModal } from './_components/CreateTeamModal'
-import { Notifications } from './_components/Notifications'
-import { ProfileInfo } from './_components/ProfileInfo'
-import { TeamSwitcher } from './_components/TeamSwitcher'
+import { CreateTeamModal } from './CreateTeamModal'
+import { Notifications } from './Notifications'
+import { ProfileInfo } from './ProfileInfo'
+import { TeamSwitcher } from './TeamSwitcher'
 
 export default async function Page() {
     const user = await getUser()
     const userTeams = await getUserTeams()
     const invitesWithTeam = await db.invite.findMany({
         where: {
+            accepted: 'PENDING',
             email: user?.email ?? undefined,
         },
         include: {

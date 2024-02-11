@@ -8,11 +8,6 @@ datasource db {
   directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
-enum Role {
-  ADMIN
-  MEMBER
-}
-
 model Team {
   id        String   @id @default(cuid())
   name      String
@@ -26,12 +21,13 @@ model Team {
 }
 
 model Invite {
-  id        String   @id @default(cuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id        String     @id @default(cuid())
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
   email     String
   teamId    String
-  team      Team     @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  team      Team       @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  accepted  Acceptance @default(PENDING)
 }
 
 model Member {
@@ -94,4 +90,14 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+enum Role {
+  ADMIN
+  MEMBER
+}
+
+enum Acceptance {
+  PENDING
+  REJECTED
 }

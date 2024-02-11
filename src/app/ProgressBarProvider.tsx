@@ -3,7 +3,7 @@
 import { Next13ProgressBar } from 'next13-progressbar'
 import { type FC, type PropsWithChildren, Suspense } from 'react'
 
-export const Providers: FC<PropsWithChildren> = ({ children }) => <>
+export const ProgressBarProvider: FC<PropsWithChildren> = ({ children }) => <>
     {children}
 
     <Suspense>
